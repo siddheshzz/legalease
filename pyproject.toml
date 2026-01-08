@@ -33,7 +33,7 @@ dev = [
 ]
 
 [project.scripts]
-legalease-api = "app.main:run"
+legalease-api = "app.main:app"
 
 [tool.uv]
 default-groups = ["dev"]

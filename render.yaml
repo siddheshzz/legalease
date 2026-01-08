@@ -1,0 +1,28 @@
+services:
+  # 1. Backend (Docker-based)
+  - type: web
+    name: legalease-api
+    runtime: docker
+    env: docker
+    plan: free
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false # Set manually in Render Dashboard
+      - key: GROQ_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+      - key: ENVIRONMENT
+        value: prod
+
+  # 2. Frontend (Static Site - Best Practice)
+  - type: static
+    name: legalease-ui
+    buildCommand: cd frontend && npm install && npm run build
+    publishPath: ./frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: legalease-api
+          property: host

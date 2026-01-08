@@ -8,6 +8,7 @@ from app.logging_config import configure_logging
 from app.routers import documents
 
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application startup/shutdown hook for initializing heavy resources."""
